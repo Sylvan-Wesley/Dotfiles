@@ -1,6 +1,6 @@
 [user]
 	name = Sylvan-Wesley
-	email = 3513942649@qq.com
+	email = sylvanxinyuanwei@gmail.com
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -8,3 +8,9 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[alias]
+	graph = log --all --graph --decorate --oneline
+	ck = checkout
+	confg = config --global
+	ci = commit
+	st = status

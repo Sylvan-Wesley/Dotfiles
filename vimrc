@@ -254,3 +254,4 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 "Highlight current line
 set cursorline
+autocmd FileType gitcommit setlocal textwidth=72
