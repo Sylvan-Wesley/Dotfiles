@@ -14,3 +14,5 @@
 	confg = config --global
 	ci = commit
 	st = status
+[core]
+	excludesfile = /Users/wesleysylvan/.gitignore_global
