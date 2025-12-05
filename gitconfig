@@ -1,6 +1,7 @@
 [user]
 	name = Sylvan-Wesley
 	email = sylvanxinyuanwei@gmail.com
+	signingkey = 0234AA2587A04C58441C30A0643663619977A2D5
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -14,5 +15,10 @@
 	confg = config --global
 	ci = commit
 	st = status
+	confl = config --local
 [core]
 	excludesfile = /Users/wesleysylvan/.gitignore_global
+[pull]
+	rebase = true
+[commit]
+	gpgsign = false
