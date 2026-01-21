@@ -12,6 +12,10 @@ alias tk="tmux kill-server"
 alias v="vim"
 me="sylvanxinyuanwei@gmail.com"
 Emp="/Users/wesleysylvan/Documents/Documents/Embodied AI/Preliminaries"
+jo () {
+	j $1
+	open .
+}
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,

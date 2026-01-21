@@ -1,0 +1,640 @@
+-- ============================================
+-- HAMMERSPOON WINDOW MANAGEMENT CONFIG
+-- ============================================
+-- Save this as: ~/.hammerspoon/init.lua
+-- Reload config: Cmd + Ctrl + R
+
+-- Show alert when config loads successfully
+hs.alert.show("🔨 Hammerspoon Config Loaded!")
+
+-- ============================================
+-- HELPER FUNCTIONS
+-- ============================================
+
+-- Get the currently focused window
+local function getFocusedWindow()
+    return hs.window.focusedWindow()
+end
+
+-- Get the screen the window is on
+local function getScreen(win)
+    return win:screen()
+end
+
+-- ============================================
+-- WINDOW POSITIONING FUNCTIONS
+-- ============================================
+
+-- Move window to LEFT HALF of screen
+local function moveWindowToLeftHalf()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y,
+            w = frame.w / 2,
+            h = frame.h
+        })
+    end
+end
+
+-- Move window to RIGHT HALF of screen
+local function moveWindowToRightHalf()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (frame.w / 2),
+            y = frame.y,
+            w = frame.w / 2,
+            h = frame.h
+        })
+    end
+end
+
+-- Move window to TOP HALF of screen
+local function moveWindowToTopHalf()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y,
+            w = frame.w,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- Move window to BOTTOM HALF of screen
+local function moveWindowToBottomHalf()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y + (frame.h / 2),
+            w = frame.w,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- MAXIMIZE window (fullscreen)
+local function maximizeWindow()
+    local win = getFocusedWindow()
+    if win then
+        win:maximize()
+    end
+end
+
+-- CENTER window (keep same size, just center it)
+local function centerWindow()
+    local win = getFocusedWindow()
+    if win then
+        win:centerOnScreen()
+    end
+end
+
+-- ============================================
+-- QUARTER SCREEN POSITIONS
+-- ============================================
+
+-- Top-left quarter
+local function moveWindowToTopLeft()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y,
+            w = frame.w / 2,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- Top-right quarter
+local function moveWindowToTopRight()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (frame.w / 2),
+            y = frame.y,
+            w = frame.w / 2,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- Bottom-left quarter
+local function moveWindowToBottomLeft()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y + (frame.h / 2),
+            w = frame.w / 2,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- Bottom-right quarter
+local function moveWindowToBottomRight()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (frame.w / 2),
+            y = frame.y + (frame.h / 2),
+            w = frame.w / 2,
+            h = frame.h / 2
+        })
+    end
+end
+
+-- ============================================
+-- THIRD SCREEN POSITIONS (useful for wide monitors)
+-- ============================================
+
+-- Left third
+local function moveWindowToLeftThird()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y,
+            w = frame.w / 3,
+            h = frame.h
+        })
+    end
+end
+
+-- Center third
+local function moveWindowToCenterThird()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (frame.w / 3),
+            y = frame.y,
+            w = frame.w / 3,
+            h = frame.h
+        })
+    end
+end
+
+-- Right third
+local function moveWindowToRightThird()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (2 * frame.w / 3),
+            y = frame.y,
+            w = frame.w / 3,
+            h = frame.h
+        })
+    end
+end
+
+-- ============================================
+-- TWO-THIRDS POSITIONS (great for coding + documentation)
+-- ============================================
+
+-- Left two-thirds
+local function moveWindowToLeftTwoThirds()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x,
+            y = frame.y,
+            w = (2 * frame.w) / 3,
+            h = frame.h
+        })
+    end
+end
+
+-- Right two-thirds
+local function moveWindowToRightTwoThirds()
+    local win = getFocusedWindow()
+    if win then
+        local screen = getScreen(win)
+        local frame = screen:frame()
+        
+        win:setFrame({
+            x = frame.x + (frame.w / 3),
+            y = frame.y,
+            w = (2 * frame.w) / 3,
+            h = frame.h
+        })
+    end
+end
+
+-- ============================================
+-- WINDOW SWITCHING
+-- ============================================
+
+-- Helper function to filter out windows we don't want to switch to
+local function isValidWindow(win)
+    if not win then return false end
+    
+    local app = win:application()
+    if not app then return false end
+    
+    local appName = app:name()
+    
+    -- Exclude Hammerspoon itself and other system utilities
+    local excludedApps = {
+        "Hammerspoon",
+        "Notification Center",
+        "Control Center",
+        "SystemUIServer"
+    }
+    
+    for _, excluded in ipairs(excludedApps) do
+        if appName == excluded then
+            return false
+        end
+    end
+    
+    -- Exclude windows that are minimized or hidden
+    if not win:isStandard() or not win:isVisible() then
+        return false
+    end
+    
+    return true
+end
+
+-- Switch to NEXT window (across all apps)
+local function switchToNextWindow()
+    local allWindows = hs.window.orderedWindows()
+    local validWindows = {}
+    
+    -- Filter to get only valid windows
+    for _, win in ipairs(allWindows) do
+        if isValidWindow(win) then
+            table.insert(validWindows, win)
+        end
+    end
+    
+    if #validWindows > 1 then
+        -- Focus on the second valid window (next in line)
+        validWindows[2]:focus()
+        local appName = validWindows[2]:application():name()
+        hs.alert.show("→ " .. appName)
+    else
+        hs.alert.show("No other windows to switch to")
+    end
+end
+
+-- Switch to PREVIOUS window (across all apps)
+local function switchToPreviousWindow()
+    local allWindows = hs.window.orderedWindows()
+    local validWindows = {}
+    
+    -- Filter to get only valid windows
+    for _, win in ipairs(allWindows) do
+        if isValidWindow(win) then
+            table.insert(validWindows, win)
+        end
+    end
+    
+    if #validWindows > 1 then
+        -- Get the last window in the list
+        local lastWindow = validWindows[#validWindows]
+        lastWindow:focus()
+        local appName = lastWindow:application():name()
+        hs.alert.show("← " .. appName)
+    else
+        hs.alert.show("No other windows to switch to")
+    end
+end
+
+-- Switch between windows of the SAME app (like Cmd+` but customizable)
+local function switchToNextWindowSameApp()
+    local currentApp = hs.application.frontmostApplication()
+    local allWindows = currentApp:allWindows()
+    local validWindows = {}
+    
+    -- Filter to get only valid windows
+    for _, win in ipairs(allWindows) do
+        if isValidWindow(win) then
+            table.insert(validWindows, win)
+        end
+    end
+    
+    if #validWindows > 1 then
+        -- Focus on the next window of the same app
+        validWindows[2]:focus()
+        hs.alert.show("→ Next " .. currentApp:name() .. " Window")
+    else
+        hs.alert.show("Only one " .. currentApp:name() .. " window")
+    end
+end
+
+-- ============================================
+-- PRESET LAYOUTS
+-- ============================================
+
+-- LEARNING LAYOUT: VSCode (top-right), Safari (left half), Typora (bottom-right)
+local function applyLearningLayout()
+    -- Get the main screen dimensions
+    local screen = hs.screen.mainScreen()
+    local frame = screen:frame()
+    
+    hs.alert.show("🎓 Setting up Learning Layout...")
+    
+    -- Helper function to launch app if not running and wait for it
+    local function ensureAppRunning(appName, bundleID, displayName)
+        local app = hs.application.find(appName)
+        if not app then
+            hs.alert.show("🚀 Launching " .. displayName .. "...")
+            -- Try launching by bundle ID first (more reliable)
+            if bundleID then
+                hs.application.open(bundleID)
+            else
+                hs.application.open(appName)
+            end
+            return false -- App wasn't running, need to wait
+        end
+        return true -- App was already running
+    end
+    
+    -- Check and launch apps if needed
+    -- Using bundle IDs for more reliable launching
+    local safariRunning = ensureAppRunning("Safari", "com.apple.Safari", "Safari")
+    local vscodeRunning = ensureAppRunning("Visual Studio Code", "com.microsoft.VSCode", "VSCode")
+    local typoraRunning = ensureAppRunning("Typora", "abnerworks.Typora", "Typora")
+    
+    -- Calculate wait time based on what needs to launch
+    local waitTime = 0
+    if not safariRunning then waitTime = math.max(waitTime, 3) end
+    if not vscodeRunning then waitTime = math.max(waitTime, 6) end
+    if not typoraRunning then waitTime = math.max(waitTime, 5) end -- Increased wait time for Typora
+    
+    -- If apps needed launching, wait for them to start
+    if waitTime > 0 then
+        hs.alert.show("⏳ Waiting " .. waitTime .. "s for apps to launch...")
+    end
+    
+    -- Position windows (with delay if apps were launched)
+    hs.timer.doAfter(waitTime, function()
+        -- Position Safari (left half)
+        local safari = hs.application.find("Safari")
+        if safari then
+            local safariWindow = safari:mainWindow()
+            if safariWindow then
+                safariWindow:setFrame({
+                    x = frame.x,
+                    y = frame.y,
+                    w = frame.w / 2,
+                    h = frame.h
+                })
+                hs.alert.show("📱 Safari → Left Half")
+            else
+                hs.alert.show("⚠️ Safari has no window - creating one...")
+                -- Create a new Safari window
+                hs.timer.doAfter(0.5, function()
+                    safari:selectMenuItem({"File", "New Window"})
+                end)
+            end
+        end
+        
+        -- Small delay between positioning
+        hs.timer.doAfter(0.3, function()
+            -- Position VSCode (top-right quarter)
+            local vscode = hs.application.find("Visual Studio Code")
+            if vscode then
+                local vscodeWindow = vscode:mainWindow()
+                if vscodeWindow then
+                    vscodeWindow:setFrame({
+                        x = frame.x + (frame.w / 2),
+                        y = frame.y,
+                        w = frame.w / 2,
+                        h = frame.h / 2
+                    })
+                    hs.alert.show("💻 VSCode → Top-Right Quarter")
+                else
+                    hs.alert.show("⚠️ VSCode has no window - open a folder first")
+                end
+            end
+        end)
+        
+        -- Position Typora (bottom-right quarter)
+        hs.timer.doAfter(0.6, function()
+            local typora = hs.application.find("Typora")
+            if typora then
+                -- Wait a bit more for Typora to fully initialize
+                hs.timer.doAfter(0.5, function()
+                    local typoraWindow = typora:mainWindow()
+                    if typoraWindow then
+                        typoraWindow:setFrame({
+                            x = frame.x + (frame.w / 2),
+                            y = frame.y + (frame.h / 2),
+                            w = frame.w / 2,
+                            h = frame.h / 2
+                        })
+                        hs.alert.show("📝 Typora → Bottom-Right Quarter")
+                    else
+                        hs.alert.show("⚠️ Typora has no window - creating one...")
+                        -- Try to create a new Typora window
+                        hs.timer.doAfter(0.5, function()
+                            typora:selectMenuItem({"File", "New"})
+                            -- Try positioning again after creating window
+                            hs.timer.doAfter(1, function()
+                                local newTyporaWindow = typora:mainWindow()
+                                if newTyporaWindow then
+                                    newTyporaWindow:setFrame({
+                                        x = frame.x + (frame.w / 2),
+                                        y = frame.y + (frame.h / 2),
+                                        w = frame.w / 2,
+                                        h = frame.h / 2
+                                    })
+                                    hs.alert.show("📝 Typora → Bottom-Right Quarter")
+                                end
+                            end)
+                        end)
+                    end
+                end)
+            else
+                hs.alert.show("⚠️ Typora failed to launch - check if it's installed")
+            end
+            
+            -- Final confirmation
+            hs.timer.doAfter(2, function()
+                hs.alert.show("✅ Learning Layout Applied!")
+            end)
+        end)
+    end)
+end
+
+-- ============================================
+-- MULTI-MONITOR SUPPORT
+-- ============================================
+
+-- Move window to NEXT monitor
+local function moveWindowToNextScreen()
+    local win = getFocusedWindow()
+    if win then
+        win:moveToScreen(win:screen():next())
+    end
+end
+
+-- Move window to PREVIOUS monitor
+local function moveWindowToPreviousScreen()
+    local win = getFocusedWindow()
+    if win then
+        win:moveToScreen(win:screen():previous())
+    end
+end
+
+-- ============================================
+-- KEYBOARD SHORTCUTS
+-- ============================================
+-- Format: hs.hotkey.bind({modifiers}, "key", function)
+-- Modifiers: "cmd", "ctrl", "alt", "shift"
+
+-- BASIC HALVES
+hs.hotkey.bind({"cmd", "ctrl"}, "Left", moveWindowToLeftHalf)
+hs.hotkey.bind({"cmd", "ctrl"}, "Right", moveWindowToRightHalf)
+hs.hotkey.bind({"cmd", "ctrl"}, "Up", moveWindowToTopHalf)
+hs.hotkey.bind({"cmd", "ctrl"}, "Down", moveWindowToBottomHalf)
+
+-- MAXIMIZE & CENTER
+hs.hotkey.bind({"cmd", "ctrl"}, "M", maximizeWindow)
+hs.hotkey.bind({"cmd", "ctrl"}, "C", centerWindow)
+
+-- QUARTERS (with Shift modifier)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "Left", moveWindowToTopLeft)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "Right", moveWindowToTopRight)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "Down", moveWindowToBottomLeft)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "Up", moveWindowToBottomRight)
+
+-- THIRDS (using number keys)
+hs.hotkey.bind({"cmd", "ctrl"}, "1", moveWindowToLeftThird)
+hs.hotkey.bind({"cmd", "ctrl"}, "2", moveWindowToCenterThird)
+hs.hotkey.bind({"cmd", "ctrl"}, "3", moveWindowToRightThird)
+
+-- TWO-THIRDS (using Alt modifier)
+hs.hotkey.bind({"cmd", "ctrl", "alt"}, "1", moveWindowToLeftTwoThirds)
+hs.hotkey.bind({"cmd", "ctrl", "alt"}, "3", moveWindowToRightTwoThirds)
+
+-- MULTI-MONITOR
+hs.hotkey.bind({"cmd", "ctrl"}, "N", moveWindowToNextScreen)
+hs.hotkey.bind({"cmd", "ctrl"}, "P", moveWindowToPreviousScreen)
+
+-- WINDOW SWITCHING
+hs.hotkey.bind({"cmd", "ctrl"}, "Z", switchToNextWindow)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "Tab", switchToPreviousWindow)
+hs.hotkey.bind({"cmd", "ctrl"}, "`", switchToNextWindowSameApp)
+
+-- PRESET LAYOUTS
+hs.hotkey.bind({"cmd", "ctrl"}, "L", applyLearningLayout)
+
+-- RELOAD CONFIG
+hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+    hs.reload()
+    hs.alert.show("🔄 Hammerspoon Config Reloaded!")
+end)
+
+-- ============================================
+-- CONFIGURATION WATCHER (auto-reload on save)
+-- ============================================
+local function reloadConfig(files)
+    local doReload = false
+    for _, file in pairs(files) do
+        if file:sub(-4) == ".lua" then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+
+local configWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
+configWatcher:start()
+
+-- ============================================
+-- QUICK REFERENCE
+-- ============================================
+--[[
+
+KEYBOARD SHORTCUTS QUICK REFERENCE:
+====================================
+
+HALVES:
+  Cmd + Ctrl + Left Arrow  → Left half
+  Cmd + Ctrl + Right Arrow → Right half
+  Cmd + Ctrl + Up Arrow    → Top half
+  Cmd + Ctrl + Down Arrow  → Bottom half
+
+MAXIMIZE & CENTER:
+  Cmd + Ctrl + M → Maximize (fullscreen)
+  Cmd + Ctrl + C → Center window
+
+QUARTERS (add Shift):
+  Cmd + Ctrl + Shift + Left  → Top-left quarter
+  Cmd + Ctrl + Shift + Right → Top-right quarter
+  Cmd + Ctrl + Shift + Down  → Bottom-left quarter
+  Cmd + Ctrl + Shift + Up    → Bottom-right quarter
+
+THIRDS (number keys):
+  Cmd + Ctrl + 1 → Left third
+  Cmd + Ctrl + 2 → Center third
+  Cmd + Ctrl + 3 → Right third
+
+TWO-THIRDS (add Alt):
+  Cmd + Ctrl + Alt + 1 → Left two-thirds
+  Cmd + Ctrl + Alt + 3 → Right two-thirds
+
+MULTI-MONITOR:
+  Cmd + Ctrl + N → Move to next monitor
+  Cmd + Ctrl + P → Move to previous monitor
+
+WINDOW SWITCHING:
+  Cmd + Ctrl + Tab       → Switch to next window (all apps)
+  Cmd + Ctrl + Shift + Tab → Switch to previous window (all apps)
+  Cmd + Ctrl + `         → Switch between windows of same app
+
+PRESET LAYOUTS:
+  Cmd + Ctrl + L → Learning Layout
+                    (Auto-launches apps if not running)
+                    (Safari: left half, VSCode: top-right, Typora: bottom-right)
+
+RELOAD CONFIG:
+  Cmd + Ctrl + R → Reload Hammerspoon config
+
+====================================
+]]
